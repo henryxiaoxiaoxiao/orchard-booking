@@ -1,184 +1,114 @@
 "use client";
 
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Apple, Phone, Mail, User, CheckCircle, ArrowRight, Loader2, MapPin, Calendar, Star, Leaf } from 'lucide-react';
+import { Apple, Phone, Mail, User, CheckCircle, ArrowRight, Loader2, MapPin, Star } from 'lucide-react';
 
-export default function EnhancedOrchardBooking() {
+export default function ElegantOrchard() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
-    
-    // NOTE FOR HENRY: In a real production setup, we would use a service like 
-    // Formspree or a simple Cloudflare Worker to send this data to your email.
-    const formData = new FormData(e.currentTarget);
-    const data = {
-      name: formData.get('name'),
-      email: formData.get('email'),
-      phone: formData.get('phone'),
-    };
-
-    console.log("Booking Data Captured:", data);
-
-    // Simulated API Call
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
+    await new Promise(resolve => setTimeout(resolve, 1500));
     setIsLoading(false);
     setIsSubmitted(true);
   };
 
   if (isSubmitted) {
     return (
-      <div className="min-h-screen bg-[#fffcf5] flex items-center justify-center p-6 font-serif">
-        <motion.div 
-          initial={{ scale: 0.9, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          className="bg-white p-12 rounded-[40px] shadow-2xl text-center max-w-sm w-full space-y-8 border border-stone-100"
-        >
-          <div className="w-24 h-24 bg-green-50 text-green-600 rounded-full flex items-center justify-center mx-auto shadow-inner">
-            <CheckCircle size={48} strokeWidth={1.5} />
+      <div style={{ minHeight: '100vh', backgroundColor: '#fffcf5', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px', fontFamily: 'serif' }}>
+        <div style={{ backgroundColor: 'white', padding: '48px', borderRadius: '32px', boxShadow: '0 20px 50px rgba(0,0,0,0.05)', textAlign: 'center', maxWidth: '400px', width: '100%', border: '1px solid #f5f5f0' }}>
+          <div style={{ width: '80px', height: '80px', backgroundColor: '#f0fdf4', color: '#16a34a', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 24px' }}>
+            <CheckCircle size={40} />
           </div>
-          <div className="space-y-3">
-            <h2 className="text-3xl font-bold text-stone-900 italic">Reservation Confirmed</h2>
-            <p className="text-stone-500 font-sans text-sm leading-relaxed">Your spot in the orchard is waiting. A confirmation has been logged for Borugi Farms.</p>
-          </div>
-          <button 
-            onClick={() => setIsSubmitted(false)}
-            className="w-full py-4 bg-stone-900 text-white rounded-2xl font-bold font-sans text-sm uppercase tracking-widest active:scale-95 transition-all"
-          >
-            Done
-          </button>
-        </motion.div>
+          <h2 style={{ fontSize: '28px', marginBottom: '12px', fontWeight: 'bold', fontStyle: 'italic' }}>Reserved</h2>
+          <p style={{ color: '#78716c', fontFamily: 'sans-serif', fontSize: '14px', lineHeight: '1.6', marginBottom: '32px' }}>We've received your request. Borugi Farms will see you soon.</p>
+          <button onClick={() => setIsSubmitted(false)} style={{ width: '100%', padding: '16px', backgroundColor: '#1c1917', color: 'white', borderRadius: '16px', fontWeight: 'bold', border: 'none', cursor: 'pointer' }}>Done</button>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#fffcf5] text-stone-900 font-sans pb-20 selection:bg-red-100">
-      {/* Visual Background Element */}
-      <div className="absolute top-0 left-0 w-full h-[50vh] bg-gradient-to-b from-red-50/50 to-transparent pointer-events-none -z-10" />
+    <div style={{ minHeight: '100vh', backgroundColor: '#fffcf5', color: '#1c1917', fontFamily: 'sans-serif', paddingBottom: '80px' }}>
+      {/* Background Gradient */}
+      <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '400px', background: 'linear-gradient(180deg, rgba(239, 68, 68, 0.05) 0%, rgba(255, 252, 245, 0) 100%)', pointerEvents: 'none' }} />
 
-      {/* Header / Hero */}
-      <header className="px-6 pt-16 pb-24 text-center space-y-6">
-        <motion.div 
-          initial={{ y: -20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          className="inline-flex p-4 bg-white rounded-3xl shadow-xl shadow-red-100/50 mb-4"
-        >
-          <Apple size={40} className="text-red-600" />
-        </motion.div>
-        <div className="space-y-3">
-            <h1 className="text-5xl font-serif italic font-black tracking-tight text-stone-900">Borugi Farms</h1>
-            <div className="flex items-center justify-center space-x-2 text-stone-400 text-xs font-bold uppercase tracking-[0.2em]">
-                <MapPin size={14} className="text-red-400" />
-                <span>Morgan Hill, California</span>
-            </div>
+      <header style={{ padding: '60px 24px 40px', textAlign: 'center' }}>
+        <div style={{ display: 'inline-flex', padding: '16px', backgroundColor: 'white', borderRadius: '24px', boxShadow: '0 10px 30px rgba(239, 68, 68, 0.1)', marginBottom: '24px' }}>
+          <Apple size={32} color="#ef4444" />
+        </div>
+        <h1 style={{ fontFamily: 'serif', fontSize: '42px', fontStyle: 'italic', fontWeight: '900', margin: '0 0 8px' }}>Borugi Farms</h1>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', color: '#a8a29e', fontSize: '12px', fontWeight: 'bold', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+          <MapPin size={14} color="#f87171" />
+          <span>Morgan Hill, CA</span>
         </div>
       </header>
 
-      <main className="max-w-md mx-auto px-6 -mt-12">
-        {/* Availability Badge */}
-        <div className="flex justify-center mb-8">
-            <div className="bg-green-100 text-green-700 px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest flex items-center space-x-2 border border-green-200">
-                <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
-                <span>Current Status: Peak Harvest</span>
-            </div>
+      <main style={{ maxWidth: '440px', margin: '0 auto', padding: '0 24px' }}>
+        {/* Status Badge */}
+        <div style={{ textAlign: 'center', marginBottom: '32px' }}>
+          <span style={{ backgroundColor: '#f0fdf4', color: '#15803d', padding: '6px 16px', borderRadius: '100px', fontSize: '10px', fontWeight: '900', textTransform: 'uppercase', letterSpacing: '0.05em', border: '1px solid #dcfce7' }}>
+            ● Peak Cherry Season
+          </span>
         </div>
 
-        <div className="bg-white rounded-[40px] shadow-[0_20px_60px_rgba(0,0,0,0.05)] border border-stone-50 p-10 space-y-10 relative overflow-hidden">
-          {/* Decorative Leaf */}
-          <Leaf className="absolute -top-4 -right-4 text-stone-50 rotate-45" size={100} />
-          
-          <div className="space-y-2 relative z-10">
-            <h2 className="text-2xl font-bold font-serif italic text-stone-800">Secure your session</h2>
-            <p className="text-stone-400 text-sm font-medium">Simple, fast, no login required.</p>
+        {/* Form Card */}
+        <div style={{ backgroundColor: 'white', borderRadius: '32px', padding: '40px', boxShadow: '0 30px 60px rgba(28, 25, 23, 0.04)', border: '1px solid #f5f5f0' }}>
+          <div style={{ marginBottom: '40px' }}>
+            <h2 style={{ fontFamily: 'serif', fontSize: '24px', fontWeight: 'bold', fontStyle: 'italic', margin: '0 0 4px' }}>Secure your spot</h2>
+            <p style={{ color: '#a8a29e', fontSize: '14px' }}>Instant booking, no login required.</p>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-8 relative z-10">
-            {/* Input Group */}
-            <div className="space-y-6">
-                <div className="space-y-2 group">
-                    <label className="text-[10px] uppercase font-black tracking-widest text-stone-400 ml-1 group-focus-within:text-red-500 transition-colors">Name</label>
-                    <div className="relative">
-                        <User className="absolute left-0 top-1/2 -translate-y-1/2 text-stone-300 group-focus-within:text-red-400 transition-colors" size={20} />
-                        <input 
-                        name="name"
-                        required
-                        type="text" 
-                        placeholder="e.g. Henry Xiao"
-                        className="w-full pl-8 pr-4 py-4 bg-transparent border-b-2 border-stone-100 focus:border-red-600 outline-none transition-all font-medium text-lg placeholder:text-stone-200"
-                        />
-                    </div>
-                </div>
-
-                <div className="space-y-2 group">
-                    <label className="text-[10px] uppercase font-black tracking-widest text-stone-400 ml-1 group-focus-within:text-red-500 transition-colors">Email</label>
-                    <div className="relative">
-                        <Mail className="absolute left-0 top-1/2 -translate-y-1/2 text-stone-300 group-focus-within:text-red-400 transition-colors" size={20} />
-                        <input 
-                        name="email"
-                        required
-                        type="email" 
-                        placeholder="henry@example.com"
-                        className="w-full pl-8 pr-4 py-4 bg-transparent border-b-2 border-stone-100 focus:border-red-600 outline-none transition-all font-medium text-lg placeholder:text-stone-200"
-                        />
-                    </div>
-                </div>
-
-                <div className="space-y-2 group">
-                    <label className="text-[10px] uppercase font-black tracking-widest text-stone-400 ml-1 group-focus-within:text-red-500 transition-colors">Mobile</label>
-                    <div className="relative">
-                        <Phone className="absolute left-0 top-1/2 -translate-y-1/2 text-stone-300 group-focus-within:text-red-400 transition-colors" size={20} />
-                        <input 
-                        name="phone"
-                        required
-                        type="tel" 
-                        placeholder="(408) 000-0000"
-                        className="w-full pl-8 pr-4 py-4 bg-transparent border-b-2 border-stone-100 focus:border-red-600 outline-none transition-all font-medium text-lg placeholder:text-stone-200"
-                        />
-                    </div>
-                </div>
+          <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+              <label style={{ fontSize: '10px', fontWeight: '900', textTransform: 'uppercase', letterSpacing: '0.1em', color: '#a8a29e', marginLeft: '4px' }}>Full Name</label>
+              <div style={{ position: 'relative' }}>
+                <User style={{ position: 'absolute', left: 0, top: '50%', transform: 'translateY(-50%)', color: '#e7e5e4' }} size={20} />
+                <input required name="name" type="text" placeholder="Henry Xiao" style={{ width: '100%', padding: '12px 0 12px 32px', backgroundColor: 'transparent', border: 'none', borderBottom: '2px solid #f5f5f4', fontSize: '18px', outline: 'none', fontWeight: '500' }} />
+              </div>
             </div>
 
-            <button 
-              type="submit"
-              disabled={isLoading}
-              className="w-full py-6 bg-red-600 text-white rounded-3xl font-bold font-sans text-sm uppercase tracking-[0.2em] shadow-2xl shadow-red-200 active:scale-95 transition-all disabled:bg-stone-200 flex items-center justify-center space-x-3"
-            >
-              {isLoading ? (
-                <Loader2 className="animate-spin" size={20} />
-              ) : (
-                <>
-                  <span>Request Spot</span>
-                  <ArrowRight size={18} />
-                </>
-              )}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+              <label style={{ fontSize: '10px', fontWeight: '900', textTransform: 'uppercase', letterSpacing: '0.1em', color: '#a8a29e', marginLeft: '4px' }}>Email</label>
+              <div style={{ position: 'relative' }}>
+                <Mail style={{ position: 'absolute', left: 0, top: '50%', transform: 'translateY(-50%)', color: '#e7e5e4' }} size={20} />
+                <input required name="email" type="email" placeholder="henry@example.com" style={{ width: '100%', padding: '12px 0 12px 32px', backgroundColor: 'transparent', border: 'none', borderBottom: '2px solid #f5f5f4', fontSize: '18px', outline: 'none', fontWeight: '500' }} />
+              </div>
+            </div>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+              <label style={{ fontSize: '10px', fontWeight: '900', textTransform: 'uppercase', letterSpacing: '0.1em', color: '#a8a29e', marginLeft: '4px' }}>Mobile</label>
+              <div style={{ position: 'relative' }}>
+                <Phone style={{ position: 'absolute', left: 0, top: '50%', transform: 'translateY(-50%)', color: '#e7e5e4' }} size={20} />
+                <input required name="phone" type="tel" placeholder="(408) 000-0000" style={{ width: '100%', padding: '12px 0 12px 32px', backgroundColor: 'transparent', border: 'none', borderBottom: '2px solid #f5f5f4', fontSize: '18px', outline: 'none', fontWeight: '500' }} />
+              </div>
+            </div>
+
+            <button type="submit" disabled={isLoading} style={{ marginTop: '16px', width: '100%', padding: '20px', backgroundColor: '#ef4444', color: 'white', borderRadius: '20px', fontWeight: 'bold', fontSize: '14px', textTransform: 'uppercase', letterSpacing: '0.15em', border: 'none', boxShadow: '0 15px 30px rgba(239, 68, 68, 0.3)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px' }}>
+              {isLoading ? <Loader2 className="animate-spin" size={20} /> : <>Request Spot <ArrowRight size={18} /></>}
             </button>
           </form>
         </div>
 
-        {/* Pricing Info Card */}
-        <div className="mt-8 grid grid-cols-2 gap-4">
-            <div className="bg-white p-6 rounded-[30px] border border-stone-50 shadow-sm flex flex-col items-center text-center space-y-2">
-                <span className="text-[9px] uppercase font-black text-stone-300 tracking-widest">Pricing</span>
-                <span className="text-xl font-serif italic font-bold text-red-600">$6.50/lb</span>
-                <span className="text-[8px] font-bold text-stone-400">Rainier & Bing</span>
-            </div>
-            <div className="bg-white p-6 rounded-[30px] border border-stone-50 shadow-sm flex flex-col items-center text-center space-y-2">
-                <span className="text-[9px] uppercase font-black text-stone-300 tracking-widest">Entry</span>
-                <span className="text-xl font-serif italic font-bold text-stone-800">FREE</span>
-                <span className="text-[8px] font-bold text-stone-400">Parking included</span>
-            </div>
+        {/* Info Grid */}
+        <div style={{ marginTop: '32px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+          <div style={{ backgroundColor: 'white', padding: '20px', borderRadius: '24px', textAlign: 'center', border: '1px solid #f5f5f0' }}>
+            <span style={{ fontSize: '9px', fontWeight: '900', color: '#d6d3d1', textTransform: 'uppercase', letterSpacing: '0.1em', display: 'block', marginBottom: '4px' }}>Pricing</span>
+            <span style={{ fontSize: '20px', fontFamily: 'serif', fontWeight: 'bold', fontStyle: 'italic', color: '#ef4444' }}>$6.50/lb</span>
+          </div>
+          <div style={{ backgroundColor: 'white', padding: '20px', borderRadius: '24px', textAlign: 'center', border: '1px solid #f5f5f0' }}>
+            <span style={{ fontSize: '9px', fontWeight: '900', color: '#d6d3d1', textTransform: 'uppercase', letterSpacing: '0.1em', display: 'block', marginBottom: '4px' }}>Entry</span>
+            <span style={{ fontSize: '20px', fontFamily: 'serif', fontWeight: 'bold', fontStyle: 'italic' }}>FREE</span>
+          </div>
         </div>
 
-        <div className="mt-12 flex flex-col items-center space-y-4">
-            <div className="flex items-center space-x-1">
-                {[1,2,3,4,5].map(i => <Star key={i} size={12} className="fill-orange-300 text-orange-300" />)}
-            </div>
-            <p className="text-stone-400 text-xs font-serif italic">"The sweetest cherries in Morgan Hill."</p>
+        <div style={{ marginTop: '48px', textAlign: 'center' }}>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '4px', marginBottom: '12px' }}>
+            {[1,2,3,4,5].map(i => <Star key={i} size={12} fill="#fdba74" stroke="none" />)}
+          </div>
+          <p style={{ color: '#a8a29e', fontSize: '13px', fontFamily: 'serif', fontStyle: 'italic' }}>"The best picking experience in Morgan Hill."</p>
         </div>
       </main>
     </div>
