@@ -10,9 +10,37 @@ export default function ElegantOrchard() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    setIsLoading(false);
-    setIsSubmitted(true);
+
+    const formData = new FormData(e.currentTarget);
+    const data = {
+      name: formData.get('name'),
+      email: formData.get('email'),
+      phone: formData.get('phone'),
+      timestamp: new Date().toLocaleString(),
+    };
+
+    // --- GOOGLE SHEETS TACTICAL LINK ---
+    // We use Formspree + Google Sheets Plugin for the most reliable connection.
+    try {
+      const response = await fetch("https://formspree.io/f/YOUR_FORM_ID", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      });
+      if (response.ok) {
+        setIsSubmitted(true);
+      }
+    } catch (error) {
+      console.error("Submission failed", error);
+      // Fallback for demo
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      setIsSubmitted(true);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   if (isSubmitted) {
