@@ -19,7 +19,8 @@ const LOCATIONS = [
   { id: "ranch-1", name: "Ranch One (Monterey Hwy.)", address: "10900 Monterey Road, Morgan Hill, CA 95037" },
   { id: "ranch-2", name: "Ranch Two (Gilroy)", address: "8990 Marcella Ave, Gilroy, CA 95020" },
   { id: "ranch-3", name: "Ranch Three (Godfrey)", address: "2905 Godfrey Road, Gilroy, CA 95020" },
-  { id: "ranch-4", name: "Ranch Four (101 Ranch)", address: "55 Castro Valley Road, Gilroy, CA 95020" }
+  { id: "ranch-4", name: "Ranch Four (101 Ranch)", address: "55 Castro Valley Road, Gilroy, CA 95020" },
+  { id: "ranch-5", name: "Ranch Five (Morgan Hill)", address: "550 Monterey Road, Morgan Hill, CA 95037" }
 ];
 
 export default function ElegantOrchard() {

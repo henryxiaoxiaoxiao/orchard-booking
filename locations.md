@@ -15,3 +15,7 @@ Address: 2905 Godfrey Road, Gilroy, CA 95020
 ## Ranch Four (101 Ranch)
 **Borello Farms Inc. (Gilroy)**
 Address: 55 Castro Valley Road, Gilroy, CA 95020
+
+## Ranch Five (Morgan Hill)
+**West Coast Farms, LLC.**
+Address: 550 Monterey Road, Morgan Hill, CA 95037
