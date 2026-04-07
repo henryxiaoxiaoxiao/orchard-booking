@@ -1,7 +1,19 @@
 "use client";
 
 import React, { useState } from 'react';
-import { Apple, Phone, Mail, User, CheckCircle, ArrowRight, Loader2, MapPin, Star } from 'lucide-react';
+import { Apple, Phone, Mail, User, CheckCircle, ArrowRight, Loader2, MapPin, Star, Clock } from 'lucide-react';
+
+const TIME_SLOTS = [
+  "08:00 AM - 09:00 AM",
+  "09:00 AM - 10:00 AM",
+  "10:00 AM - 11:00 AM",
+  "11:00 AM - 12:00 PM",
+  "12:00 PM - 01:00 PM",
+  "01:00 PM - 02:00 PM",
+  "02:00 PM - 03:00 PM",
+  "03:00 PM - 04:00 PM",
+  "04:00 PM - 05:00 PM"
+];
 
 export default function ElegantOrchard() {
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -16,13 +28,12 @@ export default function ElegantOrchard() {
       name: formData.get('name'),
       email: formData.get('email'),
       phone: formData.get('phone'),
+      timeSlot: formData.get('timeSlot'),
       timestamp: new Date().toLocaleString(),
     };
 
-    // --- GOOGLE SHEETS TACTICAL LINK (Simplified for Owner) ---
-    // Using Sheet Monkey: The absolute simplest way for non-tech owners.
-    // They just need to create a sheet and get a URL. No complex setup.
     try {
+      // Replace YOUR_SHEET_MONKEY_URL with the actual URL from the owner
       const response = await fetch("https://api.sheetmonkey.io/form/YOUR_SHEET_MONKEY_URL", {
         method: "POST",
         body: JSON.stringify(data),
@@ -35,7 +46,8 @@ export default function ElegantOrchard() {
       }
     } catch (error) {
       console.error("Submission failed", error);
-      // Success fallback for local testing
+      // Fallback for demo
+      await new Promise(resolve => setTimeout(resolve, 1500));
       setIsSubmitted(true);
     } finally {
       setIsLoading(false);
@@ -59,7 +71,6 @@ export default function ElegantOrchard() {
 
   return (
     <div style={{ minHeight: '100vh', backgroundColor: '#fffcf5', color: '#1c1917', fontFamily: 'sans-serif', paddingBottom: '80px' }}>
-      {/* Background Gradient */}
       <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '400px', background: 'linear-gradient(180deg, rgba(239, 68, 68, 0.05) 0%, rgba(255, 252, 245, 0) 100%)', pointerEvents: 'none' }} />
 
       <header style={{ padding: '60px 24px 40px', textAlign: 'center' }}>
@@ -74,14 +85,12 @@ export default function ElegantOrchard() {
       </header>
 
       <main style={{ maxWidth: '440px', margin: '0 auto', padding: '0 24px' }}>
-        {/* Status Badge */}
         <div style={{ textAlign: 'center', marginBottom: '32px' }}>
           <span style={{ backgroundColor: '#f0fdf4', color: '#15803d', padding: '6px 16px', borderRadius: '100px', fontSize: '10px', fontWeight: '900', textTransform: 'uppercase', letterSpacing: '0.05em', border: '1px solid #dcfce7' }}>
             ● Peak Cherry Season
           </span>
         </div>
 
-        {/* Form Card */}
         <div style={{ backgroundColor: 'white', borderRadius: '32px', padding: '40px', boxShadow: '0 30px 60px rgba(28, 25, 23, 0.04)', border: '1px solid #f5f5f0' }}>
           <div style={{ marginBottom: '40px' }}>
             <h2 style={{ fontFamily: 'serif', fontSize: '24px', fontWeight: 'bold', fontStyle: 'italic', margin: '0 0 4px' }}>Secure your spot</h2>
@@ -113,13 +122,38 @@ export default function ElegantOrchard() {
               </div>
             </div>
 
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+              <label style={{ fontSize: '10px', fontWeight: '900', textTransform: 'uppercase', letterSpacing: '0.1em', color: '#a8a29e', marginLeft: '4px' }}>Time Slot (1 Hour)</label>
+              <div style={{ position: 'relative' }}>
+                <Clock style={{ position: 'absolute', left: 0, top: '50%', transform: 'translateY(-50%)', color: '#e7e5e4' }} size={20} />
+                <select 
+                  required 
+                  name="timeSlot" 
+                  style={{ 
+                    width: '100%', 
+                    padding: '12px 0 12px 32px', 
+                    backgroundColor: 'transparent', 
+                    border: 'none', 
+                    borderBottom: '2px solid #f5f5f4', 
+                    fontSize: '18px', 
+                    outline: 'none', 
+                    fontWeight: '500',
+                    appearance: 'none',
+                    cursor: 'pointer'
+                  }}
+                >
+                  <option value="" disabled selected>Select a time</option>
+                  {TIME_SLOTS.map(slot => <option key={slot} value={slot}>{slot}</option>)}
+                </select>
+              </div>
+            </div>
+
             <button type="submit" disabled={isLoading} style={{ marginTop: '16px', width: '100%', padding: '20px', backgroundColor: '#ef4444', color: 'white', borderRadius: '20px', fontWeight: 'bold', fontSize: '14px', textTransform: 'uppercase', letterSpacing: '0.15em', border: 'none', boxShadow: '0 15px 30px rgba(239, 68, 68, 0.3)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px' }}>
               {isLoading ? <Loader2 className="animate-spin" size={20} /> : <>Request Spot <ArrowRight size={18} /></>}
             </button>
           </form>
         </div>
 
-        {/* Info Grid */}
         <div style={{ marginTop: '32px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
           <div style={{ backgroundColor: 'white', padding: '20px', borderRadius: '24px', textAlign: 'center', border: '1px solid #f5f5f0' }}>
             <span style={{ fontSize: '9px', fontWeight: '900', color: '#d6d3d1', textTransform: 'uppercase', letterSpacing: '0.1em', display: 'block', marginBottom: '4px' }}>Pricing</span>
