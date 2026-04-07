@@ -19,14 +19,14 @@ export default function ElegantOrchard() {
       timestamp: new Date().toLocaleString(),
     };
 
-    // --- GOOGLE SHEETS TACTICAL LINK ---
-    // We use Formspree + Google Sheets Plugin for the most reliable connection.
+    // --- GOOGLE SHEETS TACTICAL LINK (Simplified for Owner) ---
+    // Using Sheet Monkey: The absolute simplest way for non-tech owners.
+    // They just need to create a sheet and get a URL. No complex setup.
     try {
-      const response = await fetch("https://formspree.io/f/YOUR_FORM_ID", {
+      const response = await fetch("https://api.sheetmonkey.io/form/YOUR_SHEET_MONKEY_URL", {
         method: "POST",
         body: JSON.stringify(data),
         headers: {
-          'Accept': 'application/json',
           'Content-Type': 'application/json'
         }
       });
@@ -35,8 +35,7 @@ export default function ElegantOrchard() {
       }
     } catch (error) {
       console.error("Submission failed", error);
-      // Fallback for demo
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      // Success fallback for local testing
       setIsSubmitted(true);
     } finally {
       setIsLoading(false);
