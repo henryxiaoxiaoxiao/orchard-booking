@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
-import { Apple, Phone, Mail, User, CheckCircle, ArrowRight, Loader2, MapPin, Star, Clock } from 'lucide-react';
+import { Apple, Phone, Mail, User, CheckCircle, ArrowRight, Loader2, MapPin, Star, Clock, Home } from 'lucide-react';
 
 const TIME_SLOTS = [
   "08:00 AM - 09:00 AM",
@@ -13,6 +13,13 @@ const TIME_SLOTS = [
   "02:00 PM - 03:00 PM",
   "03:00 PM - 04:00 PM",
   "04:00 PM - 05:00 PM"
+];
+
+const LOCATIONS = [
+  { id: "ranch-1", name: "Ranch One (Monterey Hwy.)", address: "10900 Monterey Road, Morgan Hill, CA 95037" },
+  { id: "ranch-2", name: "Ranch Two (Gilroy)", address: "8990 Marcella Ave, Gilroy, CA 95020" },
+  { id: "ranch-3", name: "Ranch Three (Godfrey)", address: "2905 Godfrey Road, Gilroy, CA 95020" },
+  { id: "ranch-4", name: "Ranch Four (101 Ranch)", address: "55 Castro Valley Road, Gilroy, CA 95020" }
 ];
 
 export default function ElegantOrchard() {
@@ -28,6 +35,7 @@ export default function ElegantOrchard() {
       name: formData.get('name'),
       email: formData.get('email'),
       phone: formData.get('phone'),
+      location: formData.get('location'),
       timeSlot: formData.get('timeSlot'),
       timestamp: new Date().toLocaleString(),
     };
@@ -62,7 +70,7 @@ export default function ElegantOrchard() {
             <CheckCircle size={40} />
           </div>
           <h2 style={{ fontSize: '28px', marginBottom: '12px', fontWeight: 'bold', fontStyle: 'italic' }}>Reserved</h2>
-          <p style={{ color: '#78716c', fontFamily: 'sans-serif', fontSize: '14px', lineHeight: '1.6', marginBottom: '32px' }}>We've received your request. Borugi Farms will see you soon.</p>
+          <p style={{ color: '#78716c', fontFamily: 'sans-serif', fontSize: '14px', lineHeight: '1.6', marginBottom: '32px' }}>We've received your request. Borello & Borugi Farms will see you soon.</p>
           <button onClick={() => setIsSubmitted(false)} style={{ width: '100%', padding: '16px', backgroundColor: '#1c1917', color: 'white', borderRadius: '16px', fontWeight: 'bold', border: 'none', cursor: 'pointer' }}>Done</button>
         </div>
       </div>
@@ -77,10 +85,10 @@ export default function ElegantOrchard() {
         <div style={{ display: 'inline-flex', padding: '16px', backgroundColor: 'white', borderRadius: '24px', boxShadow: '0 10px 30px rgba(239, 68, 68, 0.1)', marginBottom: '24px' }}>
           <Apple size={32} color="#ef4444" />
         </div>
-        <h1 style={{ fontFamily: 'serif', fontSize: '42px', fontStyle: 'italic', fontWeight: '900', margin: '0 0 8px' }}>Borugi Farms</h1>
+        <h1 style={{ fontFamily: 'serif', fontSize: '42px', fontStyle: 'italic', fontWeight: '900', margin: '0 0 8px' }}>Borello Farms</h1>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', color: '#a8a29e', fontSize: '12px', fontWeight: 'bold', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
           <MapPin size={14} color="#f87171" />
-          <span>Morgan Hill, CA</span>
+          <span>Multiple Ranch Locations</span>
         </div>
       </header>
 
@@ -94,7 +102,7 @@ export default function ElegantOrchard() {
         <div style={{ backgroundColor: 'white', borderRadius: '32px', padding: '40px', boxShadow: '0 30px 60px rgba(28, 25, 23, 0.04)', border: '1px solid #f5f5f0' }}>
           <div style={{ marginBottom: '40px' }}>
             <h2 style={{ fontFamily: 'serif', fontSize: '24px', fontWeight: 'bold', fontStyle: 'italic', margin: '0 0 4px' }}>Secure your spot</h2>
-            <p style={{ color: '#a8a29e', fontSize: '14px' }}>Instant booking, no login required.</p>
+            <p style={{ color: '#a8a29e', fontSize: '14px' }}>Choose your ranch and time slot.</p>
           </div>
 
           <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
@@ -107,18 +115,36 @@ export default function ElegantOrchard() {
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-              <label style={{ fontSize: '10px', fontWeight: '900', textTransform: 'uppercase', letterSpacing: '0.1em', color: '#a8a29e', marginLeft: '4px' }}>Email</label>
-              <div style={{ position: 'relative' }}>
-                <Mail style={{ position: 'absolute', left: 0, top: '50%', transform: 'translateY(-50%)', color: '#e7e5e4' }} size={20} />
-                <input required name="email" type="email" placeholder="henry@example.com" style={{ width: '100%', padding: '12px 0 12px 32px', backgroundColor: 'transparent', border: 'none', borderBottom: '2px solid #f5f5f4', fontSize: '18px', outline: 'none', fontWeight: '500' }} />
-              </div>
-            </div>
-
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
               <label style={{ fontSize: '10px', fontWeight: '900', textTransform: 'uppercase', letterSpacing: '0.1em', color: '#a8a29e', marginLeft: '4px' }}>Mobile</label>
               <div style={{ position: 'relative' }}>
                 <Phone style={{ position: 'absolute', left: 0, top: '50%', transform: 'translateY(-50%)', color: '#e7e5e4' }} size={20} />
                 <input required name="phone" type="tel" placeholder="(408) 000-0000" style={{ width: '100%', padding: '12px 0 12px 32px', backgroundColor: 'transparent', border: 'none', borderBottom: '2px solid #f5f5f4', fontSize: '18px', outline: 'none', fontWeight: '500' }} />
+              </div>
+            </div>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+              <label style={{ fontSize: '10px', fontWeight: '900', textTransform: 'uppercase', letterSpacing: '0.1em', color: '#a8a29e', marginLeft: '4px' }}>Select Ranch Location</label>
+              <div style={{ position: 'relative' }}>
+                <Home style={{ position: 'absolute', left: 0, top: '50%', transform: 'translateY(-50%)', color: '#e7e5e4' }} size={20} />
+                <select 
+                  required 
+                  name="location" 
+                  style={{ 
+                    width: '100%', 
+                    padding: '12px 0 12px 32px', 
+                    backgroundColor: 'transparent', 
+                    border: 'none', 
+                    borderBottom: '2px solid #f5f5f4', 
+                    fontSize: '16px', 
+                    outline: 'none', 
+                    fontWeight: '500',
+                    appearance: 'none',
+                    cursor: 'pointer'
+                  }}
+                >
+                  <option value="" disabled selected>Pick a ranch</option>
+                  {LOCATIONS.map(loc => <option key={loc.id} value={loc.name}>{loc.name}</option>)}
+                </select>
               </div>
             </div>
 
@@ -135,7 +161,7 @@ export default function ElegantOrchard() {
                     backgroundColor: 'transparent', 
                     border: 'none', 
                     borderBottom: '2px solid #f5f5f4', 
-                    fontSize: '18px', 
+                    fontSize: '16px', 
                     outline: 'none', 
                     fontWeight: '500',
                     appearance: 'none',
@@ -169,7 +195,7 @@ export default function ElegantOrchard() {
           <div style={{ display: 'flex', justifyContent: 'center', gap: '4px', marginBottom: '12px' }}>
             {[1,2,3,4,5].map(i => <Star key={i} size={12} fill="#fdba74" stroke="none" />)}
           </div>
-          <p style={{ color: '#a8a29e', fontSize: '13px', fontFamily: 'serif', fontStyle: 'italic' }}>"The best picking experience in Morgan Hill."</p>
+          <p style={{ color: '#a8a29e', fontSize: '13px', fontFamily: 'serif', fontStyle: 'italic' }}>"The best picking experience in Morgan Hill & Gilroy."</p>
         </div>
       </main>
     </div>
