@@ -42,8 +42,8 @@ export default function ElegantOrchard() {
     };
 
     try {
-      // Connect to Owner's Google Apps Script URL (v2.3 Updated)
-      const response = await fetch("https://script.google.com/macros/s/AKfycbyA1_4y-vUD-YlGLJKCPTW3oUAZMUSEaXYIhbQIQhdb0fi0dnnbXkeBk3f-0aJPay2qyg/exec", {
+      // Connect to Owner's Google Apps Script URL (v2.3 Final Verified)
+      const response = await fetch("https://script.google.com/macros/s/AKfycbz7dJ-J0Q_y-SYaTWCqjDQkpR37qpN2DANsIyZ_7a_LxQBzGAbMCKlWkZW_wFOOpuM6mA/exec", {
         method: "POST",
         body: JSON.stringify(data),
         mode: "no-cors",
