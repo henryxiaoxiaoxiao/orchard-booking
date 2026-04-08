@@ -41,6 +41,9 @@ export default function ElegantOrchard() {
       timestamp: new Date().toLocaleString(),
     };
 
+    // --- STRATEGIC DATA PIPELINE ---
+    // If Email is provided: Backend (GAS) will automatically trigger a confirmation email.
+    // SMS: We are capturing the mobile number for the owner's records, but NOT sending SMS confirmations to avoid costs.
     try {
       const response = await fetch("https://script.google.com/macros/s/AKfycbzdnVFISCycZ_7X1qcSjXHg9V-uIEvWCoO8HnW3ZwYxquGQFrBYACeacnKVuPd4MTlHEg/exec", {
         method: "POST",
