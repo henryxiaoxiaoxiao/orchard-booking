@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
-import { Apple, Phone, Mail, User, CheckCircle, ArrowRight, Loader2, MapPin, Star, Clock, Home } from 'lucide-react';
+import { Apple, Phone, Mail, User, CheckCircle, ArrowRight, Loader2, MapPin, Star, Clock, Home as HomeIcon } from 'lucide-react';
 
 const TIME_SLOTS = [
   "08:00 AM - 09:00 AM",
@@ -41,10 +41,8 @@ export default function ElegantOrchard() {
       timestamp: new Date().toLocaleString(),
     };
 
-    // --- STRATEGIC DATA PIPELINE ---
-    // If Email is provided: Backend (GAS) will automatically trigger a confirmation email.
-    // SMS: We are capturing the mobile number for the owner's records, but NOT sending SMS confirmations to avoid costs.
     try {
+      // Connect to Owner's Google Apps Script URL
       const response = await fetch("https://script.google.com/macros/s/AKfycbzdnVFISCycZ_7X1qcSjXHg9V-uIEvWCoO8HnW3ZwYxquGQFrBYACeacnKVuPd4MTlHEg/exec", {
         method: "POST",
         body: JSON.stringify(data),
@@ -70,7 +68,7 @@ export default function ElegantOrchard() {
             <CheckCircle size={40} />
           </div>
           <h2 style={{ fontSize: '28px', marginBottom: '12px', fontWeight: 'bold', fontStyle: 'italic' }}>Reserved</h2>
-          <p style={{ color: '#78716c', fontFamily: 'sans-serif', fontSize: '14px', lineHeight: '1.6', marginBottom: '32px' }}>We've received your request. Borello & Borugi Farms will see you soon.</p>
+          <p style={{ color: '#78716c', fontFamily: 'sans-serif', fontSize: '14px', lineHeight: '1.6', marginBottom: '32px' }}>We've received your request. A confirmation email will be sent shortly.</p>
           <button onClick={() => setIsSubmitted(false)} style={{ width: '100%', padding: '16px', backgroundColor: '#1c1917', color: 'white', borderRadius: '16px', fontWeight: 'bold', border: 'none', cursor: 'pointer' }}>Done</button>
         </div>
       </div>
@@ -115,6 +113,14 @@ export default function ElegantOrchard() {
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+              <label style={{ fontSize: '10px', fontWeight: '900', textTransform: 'uppercase', letterSpacing: '0.1em', color: '#a8a29e', marginLeft: '4px' }}>Email (For Confirmation)</label>
+              <div style={{ position: 'relative' }}>
+                <Mail style={{ position: 'absolute', left: 0, top: '50%', transform: 'translateY(-50%)', color: '#e7e5e4' }} size={20} />
+                <input required name="email" type="email" placeholder="henry@example.com" style={{ width: '100%', padding: '12px 0 12px 32px', backgroundColor: 'transparent', border: 'none', borderBottom: '2px solid #f5f5f4', fontSize: '18px', outline: 'none', fontWeight: '500' }} />
+              </div>
+            </div>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
               <label style={{ fontSize: '10px', fontWeight: '900', textTransform: 'uppercase', letterSpacing: '0.1em', color: '#a8a29e', marginLeft: '4px' }}>Mobile</label>
               <div style={{ position: 'relative' }}>
                 <Phone style={{ position: 'absolute', left: 0, top: '50%', transform: 'translateY(-50%)', color: '#e7e5e4' }} size={20} />
@@ -125,7 +131,7 @@ export default function ElegantOrchard() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
               <label style={{ fontSize: '10px', fontWeight: '900', textTransform: 'uppercase', letterSpacing: '0.1em', color: '#a8a29e', marginLeft: '4px' }}>Select Ranch Location</label>
               <div style={{ position: 'relative' }}>
-                <Home style={{ position: 'absolute', left: 0, top: '50%', transform: 'translateY(-50%)', color: '#e7e5e4' }} size={20} />
+                <HomeIcon style={{ position: 'absolute', left: 0, top: '50%', transform: 'translateY(-50%)', color: '#e7e5e4' }} size={20} />
                 <select 
                   required 
                   name="location" 
