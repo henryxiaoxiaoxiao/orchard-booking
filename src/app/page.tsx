@@ -42,21 +42,17 @@ export default function ElegantOrchard() {
     };
 
     try {
-      // Replace YOUR_SHEET_MONKEY_URL with the actual URL from the owner
-      const response = await fetch("https://api.sheetmonkey.io/form/YOUR_SHEET_MONKEY_URL", {
+      const response = await fetch("https://script.google.com/macros/s/AKfycbzdnVFISCycZ_7X1qcSjXHg9V-uIEvWCoO8HnW3ZwYxquGQFrBYACeacnKVuPd4MTlHEg/exec", {
         method: "POST",
         body: JSON.stringify(data),
+        mode: "no-cors",
         headers: {
           'Content-Type': 'application/json'
         }
       });
-      if (response.ok) {
-        setIsSubmitted(true);
-      }
+      setIsSubmitted(true);
     } catch (error) {
       console.error("Submission failed", error);
-      // Fallback for demo
-      await new Promise(resolve => setTimeout(resolve, 1500));
       setIsSubmitted(true);
     } finally {
       setIsLoading(false);
